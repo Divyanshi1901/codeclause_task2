@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unit Converter</title>
+    <style>
+    body
+        {
+            
+			background-image: url("leadspace.png");
+			 
+	    }
+    form
+    {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+	h1{
+		font-family: cursive;
+		font-size: 3rem;
+	}
+    .converter-box
+    {
+			
+    /* border: 2px solid white; */
+	/* border-radius: 5px; */
+    padding: 20px;
+    display:inline-block;
+	margin-top: 130px;
+	color: white;
+	margin-right: 500px;
+    }
+</style>
+</head>
+<body><center>
+    <div class="converter-box">
+	<h1>Unit Converter</h1>
+    <label for="output"><strong>Input:</strong></label>
+    <input type="number" id="input"> <br> <br>
+	<label for="output"><strong>From</strong></label>
+	<select id="from">
+		<option value="cm">cm</option>
+		<option value="m">m</option>
+		<option value="km">km</option>
+		<option value="l">l</option>
+		<option value="ml">ml</option>
+		<option value="sec">sec</option>
+		<option value="min">min</option>
+		<option value="hr">hr</option>
+	</select>
+	
+	<label for="output"><strong>To</strong></label>
+    <select id="to">
+		<option value="cm">cm</option>
+		<option value="m">m</option>
+		<option value="km">km</option>
+		<option value="l">l</option>
+		<option value="ml">ml</option>
+		<option value="sec">sec</option>
+		<option value="min">min</option>
+		<option value="hr">hr</option>
+	</select><br><br>
+    <button onclick="convert()">Convert</button>
+    	<br> <br>
+        <label for="output"><strong>Result:</strong></label>
+	
+
+	<input type="text" id="output" readonly>
+    
+	<script>
+		function convert() {
+			// Get input value and units
+			let inputValue = parseFloat(document.getElementById("input").value);
+			let fromUnit = document.getElementById("from").value;
+			let toUnit = document.getElementById("to").value;
+
+			// Convert units
+			if (fromUnit === "cm" && toUnit === "m") {
+				inputValue /= 100;
+			} 
+			else if (fromUnit === "cm" && toUnit === "km") {
+				inputValue /= 100000;
+			} 
+			else if (fromUnit === "m" && toUnit === "cm") {
+				inputValue *= 100;
+			} 
+			else if (fromUnit === "m" && toUnit === "km") {
+				inputValue /= 1000;
+			} 
+			else if (fromUnit === "km" && toUnit === "cm") {
+				inputValue *= 100000;
+			} 
+			else if (fromUnit === "km" && toUnit === "m") {
+				inputValue *= 1000;
+			}
+			else if (fromUnit === "l" && toUnit === "ml") {
+				inputValue *= 1000;
+			}
+			else if (fromUnit === "ml" && toUnit === "l") {
+				inputValue /= 1000;
+			}
+
+			else if (fromUnit === "hr" && toUnit === "min") {
+				inputValue *= 60;
+			}
+			else if (fromUnit === "min" && toUnit === "hr") {
+				inputValue /= 60;
+			}
+			else if (fromUnit === "min" && toUnit === "sec") {
+				inputValue *= 60;
+			}
+			else if (fromUnit === "sec" && toUnit === "min") {
+				inputValue /= 60;
+			}
+			else if (fromUnit === "hr" && toUnit === "sec") {
+				inputValue *= 3600;
+			}
+			else if (fromUnit === "sec" && toUnit === "hr") {
+				inputValue /= 3600;
+			}
+			else {
+				// Units are the same, no conversion needed
+				inputValue = parseFloat(document.getElementById("input").value);
+			}
+
+			// Display result
+			document.getElementById("output").value = inputValue.toFixed(2);
+		}
+	</script>
+    </div>
+    </center>
+</body>
+</html>
